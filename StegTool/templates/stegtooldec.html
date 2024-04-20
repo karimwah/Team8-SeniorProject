@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Application - Encode Tool</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style type="text/css">
+        *{
+			text-decoration: none;
+		}
+		.navbar{
+            background: rgb(0, 0, 0); font-family: calibri; padding-right: 15px;padding-left: 15px;
+        }
+		.navdiv{
+			display: flex; align-items: center; justify-content: space-between;
+		}
+		.logo a{
+			font-size: 35px; font-weight: 600; color: white;
+		}
+		li{
+			list-style: none; display: inline-block;
+		}
+		li a{
+			color: white; font-size: 18px; font-weight: bold; margin-right: 25px;
+		}
+        li a:hover {
+            color: rgb(78, 222, 241);
+            transition: color 0.3s ease;
+        }
+
+		button{
+			background-color: black; margin-left: 10px; border-radius: 10px; padding: 10px; width: 90px;
+		}
+		button a{
+			color: white; font-weight: bold; font-size: 15px;
+		}
+        p, h1 {
+            color: white;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            color: black; 
+        }
+        
+
+        .form-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            color: rgb(255, 255, 255); 
+        }
+        .form-container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .form-container input[type="file"],
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: rgb(0, 0, 0);
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 18px;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navdiv">
+            <div class="logo"><a href="#">Steganography</a></div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/stegtool.html">Encode Tool</a></li>
+                <li><a href="/stegtooldec.html">Decode Tool</a></li>
+                <li><a href="/FAQ.html">FAQ</a></li>
+                <li><a href="/review.html">Feedback</a></li>
+                <li><a href="/tos.html">Terms</a></li>
+                {% if g.user %}
+                    <li><button><a href="{{ url_for('auth.logout') }}">LogOut</a></button></li>
+                {% else %}
+                    <li><button><a href="{{ url_for('auth.login') }}">Login</a></button></li>
+                    <li><button><a href="{{ url_for('auth.register') }}">Register</a></button></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <!-- Steganography Decode Tool Form -->
+    <div class="wrapper">
+        <h1>Decode Tool</h1>
+    </div>
+    <div class="form-container">
+        <form action="/decode" method="POST", enctype="multipart/form-data">
+            <label for="coded_image">Coded Image</label> <br>
+            <input type="file" name="coded_image" id="coded_image" accept=".tiff"> <br>
+            <label for="start_loc">Start Location</label> <br>
+            <input type="text" name="start_loc" id="start_loc" placeholder="Enter the start location of the encoded message"> <br>
+            <label for="message_length">Message Length</label> <br>
+            <input type="text" name="message_length" id="message_length" placeholder="Enter the length of the message"> <br>
+            <input type="submit" value="Decode">
+        </form>
+    </div>
+    <script>
+        document.getElementById("message").addEventListener("input", function() {
+            var maxLength = 50;
+            var currentLength = this.value.length;
+        
+            if (currentLength > maxLength) {
+                this.value = this.value.substring(0, maxLength);
+                // You can also display a message or perform any other action here
+                alert("You have reached the maximum character limit.");
+            }
+        });
+    </script>
+    </body>
+</html>

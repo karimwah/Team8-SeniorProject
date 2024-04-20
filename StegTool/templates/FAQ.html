@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device=width, initial-scale=1.0">
+        <title>Steganography Application</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    />
+	<style type="text/css">
+		*{
+			text-decoration: none;
+		}
+		.navbar{
+            background: rgb(0, 0, 0); font-family: calibri; padding-right: 15px;padding-left: 15px;
+        }
+		.navdiv{
+			display: flex; align-items: center; justify-content: space-between;
+		}
+		.logo a{
+			font-size: 35px; font-weight: 600; color: white;
+		}
+		li{
+			list-style: none; display: inline-block;
+		}
+		li a{
+			color: white; font-size: 18px; font-weight: bold; margin-right: 25px;
+		}
+        li a:hover {
+            color: rgb(78, 222, 241);
+            transition: color 0.3s ease;
+        }
+
+		button{
+			background-color: black; margin-left: 10px; border-radius: 10px; padding: 10px; width: 90px;
+		}
+		button a{
+			color: white; font-weight: bold; font-size: 15px;
+		}
+        p, h1 {
+            color: white;
+        }
+	</style>
+    
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="navdiv">
+                <div class="logo"><a href="#">Steganography</a></div>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/about.html">About</a></li>
+                    <li><a href="/stegtool.html">Encode Tool</a></li>
+                    <li><a href="/stegtooldec.html">Decode Tool</a></li>
+                    <li><a href="/FAQ.html">FAQ</a></li>
+                    <li><a href="/review.html">Feedback</a></li>
+                    <li><a href="/tos.html">Terms</a></li>
+                    {% if g.user %}
+                        <li><button><a href="{{ url_for('auth.logout') }}">LogOut</a></button></li>
+                    {% else %}
+                        <li><button><a href="{{ url_for('auth.login') }}">Login</a></button></li>
+                        <li><button><a href="{{ url_for('auth.register') }}">Register</a></button></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        
+        <div class="wrapper">
+            <h1>Frequently Asked Questions</h1>
+            <div class="faq">
+                <button class="accordion">
+                    What is Steganography?
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+            <div class="pannel">
+                <p>In short, steganography is the practice of concealing a file
+                    message, image, or video within another file, message, image, or video.
+                </p>
+            </div>
+        </div>
+    
+
+        <div class="faq">
+            <button class="accordion">
+                What is the advantage of steganography over cryptography?
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+        <div class="pannel">
+            <p>The advantage of steganography over cryptography alone is that the intended secret message does not attract attention to itself as
+                an object of scrutiny. Plainly visible encrypted messages, no matter
+                how unbreakable they are, arouse interest and may in themselves be incriminating in countries in which encryption is illegal.
+            </p>
+        </div>
+    </div>
+
+    <div class="faq">
+        <button class="accordion">
+            What are the five types of steganography?
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
+    
+    <div class="pannel">
+        <p>The five types of steganography is text, image, video, and network.</p>
+    </div>
+</div>
+</div>
+<script>
+      var acc = document.getElementsByClassName("accordion");
+      var i;
+
+      for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+          this.classList.toggle("active");
+          this.parentElement.classList.toggle("active");
+
+          var pannel = this.nextElementSibling;
+
+          if (pannel.style.display === "block") {
+            pannel.style.display = "none";
+          } else {
+            pannel.style.display = "block";
+          }
+        });
+      }
+    </script>
+        
+    </body>
+</html>

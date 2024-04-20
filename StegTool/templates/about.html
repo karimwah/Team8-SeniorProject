@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steganography Application - About</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style type="text/css">
+        /* Navigation bar styles */
+        .navbar {
+            background: rgb(0, 0, 0);
+            font-family: calibri;
+            padding-right: 15px;
+            padding-left: 15px;
+        }
+        .navdiv {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo a {
+            font-size: 35px;
+            font-weight: 600;
+            color: white;
+        }
+        li {
+            list-style: none;
+            display: inline-block;
+        }
+        li a {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 25px;
+        }
+        li a:hover {
+            color: rgb(78, 222, 241);
+            transition: color 0.3s ease;
+        }
+
+        button {
+            background-color: black;
+            margin-left: 10px;
+            border-radius: 10px;
+            padding: 10px;
+            width: 90px;
+        }
+        button a {
+            color: white;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        /* About page styles */
+        .wrapper {
+            max-width: 75%;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: black; /* Change title color */
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: rgba(0, 0, 0, 0.8); /* Change paragraph text color */
+        }
+        .hidden-text {
+            display: none; /* Initially hide the text */
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.8); /* Text color */
+        }
+        .hover-image-container {
+            position: relative;
+            display: flex;
+            justify-content: center; /* Horizontally center the content */
+            align-items: center; /* Vertically center the content */
+        }
+
+        .hover-image-container img {
+            width: 250px; /* Adjust the width as needed */
+            height: auto;
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .hover-image-container:hover img {
+            transform: scale(1.05); /* Scale up image on hover */
+        }
+        .hover-image-container:hover .hidden-text {
+            display: block; /* Show text on hover */
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navdiv">
+            <div class="logo"><a href="#">Steganography</a></div>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/stegtool.html">Encode Tool</a></li>
+                <li><a href="/stegtooldec.html">Decode Tool</a></li>
+                <li><a href="/FAQ.html">FAQ</a></li>
+                <li><a href="/review.html">Feedback</a></li>
+                <li><a href="/tos.html">Terms</a></li>
+                {% if g.user %}
+                    <li><button><a href="{{ url_for('auth.logout') }}">LogOut</a></button></li>
+                {% else %}
+                    <li><button><a href="{{ url_for('auth.login') }}">Login</a></button></li>
+                    <li><button><a href="{{ url_for('auth.register') }}">Register</a></button></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="wrapper">
+        <h1>About Steganography</h1>
+        <div class="hover-image-container">
+            <img src="{{ url_for('static', filename='girlgif.gif') }}" alt="Steganography Image">
+            <div class="hidden-text">Secret message.</div>
+        </div>
+        <p>Steganography is the practice of concealing information within other non-secret data. It is often used to hide the existence of the communicated data.The first recorded use of steganography dates back to ancient Greece, where secret messages were hidden on wax tablets. In modern digital steganography, data can be hidden within image files, audio files, or even text documents. Steganography plays a crucial role in digital security and can be used for both benign and malicious purposes.</p>
+    </div>
